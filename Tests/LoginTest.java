@@ -1,7 +1,8 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 
@@ -10,7 +11,7 @@ class LoginTest {
 	WebDriver driver;
 	LoginPage page;
 
-	@BeforeEach
+	@BeforeMethod
 	void setUp() throws Exception {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Alain\\eclipse-workspace\\3DRTestJava\\bin\\chromedriver.exe");
 		driver = new ChromeDriver();
@@ -18,7 +19,7 @@ class LoginTest {
 		driver.manage().window().maximize();
 	}
 
-	@AfterEach
+	@AfterMethod
 	void tearDown() throws Exception {
 		driver.close();
 	}
@@ -27,7 +28,7 @@ class LoginTest {
 	void test() {
 		page = new LoginPage(driver);
 		page.LoginApp("something@test.com", "123Test");
-		assertEquals("Incorrect username or password", page.GetDisplayedError());
+		AssertJUnit.assertEquals("Incorrect username or password", page.GetDisplayedError());
 	}
 
 }
